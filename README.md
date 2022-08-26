@@ -7,11 +7,11 @@ Inside / and / we will put regex expression.
 
 
 ## Expression Flags
-These expression flags is use for delimited space to work 
+These expression flags is used for delimited space to work 
 
-g --Global
+g --Global, is used for check expression in all text.
 
-i --Insesitive
+i --Insesitive, is used for check expression without considered text sensitive.
 
 m --Multiline
 
