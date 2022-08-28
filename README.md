@@ -22,10 +22,47 @@ x --Extended
 U --Ungreedy
 
 
-## Single character
-You can search a single character.
-Remember that Regex expression are case sensitive.
+## Single character or string
+You can search a single character or a string.
+You can search a string, but in deep, you will search every single character about your string.
+was => char w next, char a next, char s.
+Remember that Regex expressions, for default, are case sensitive.
 
-/r/
+/r/ or /was/
+
+
+## Special character
+
+. --Every character include spacing, tab ecc
+
+^ --Starting text or if expression flag ( m ) was able, every starting headed line.
+
+$ --Ending text or if expression flag ( m ) was able, every ending headed line.
+
+| --Is similar OR math
+
+. --Escape character
+
+? --Zero or one occurrence
+
+! --Zero or more occurrence
+
+\+ --One or more occurrence
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
