@@ -30,10 +30,7 @@ Remember that Regex expressions, for default, are case sensitive.
 
 /r/ or /was/
 
-
-## Special character
-
-. --Every character include spacing, tab ecc
+## Ancors
 
 ^ --Starting text or if expression flag ( m ) was able, every starting headed line.
 
@@ -44,6 +41,11 @@ $ --Ending text or if expression flag ( m ) was able, every ending headed line.
 \Z --If we work with Flag multiline and we want take only the last character (exept go ahead space ...) about all text we can use this special character
 
 \z --If we work with Flag multiline and we want take only the last character (include go ahead space ...) about all text we can use this special character
+
+## Special character
+
+. --Every character include spacing, tab ecc
+
 
 | --Is similar OR math
 
