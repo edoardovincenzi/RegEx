@@ -39,9 +39,17 @@ Remember that Regex expressions, for default, are case sensitive.
 
 $ --Ending text or if expression flag ( m ) was able, every ending headed line.
 
+\A --If we work with Flag multiline and we want take only the first character about all text we can use this special character
+
+\Z --If we work with Flag multiline and we want take only the last character (exept go ahead space ...) about all text we can use this special character
+
+\z --If we work with Flag multiline and we want take only the last character (include go ahead space ...) about all text we can use this special character
+
 | --Is similar OR math
 
 \\ --Escape character
+
+* --Zero or illimitate
 
 ? --Zero or one occurrence
 
@@ -76,15 +84,74 @@ Regex normally execute code from left to right. If you try to use a reference gr
 first reference \2 will be empty beacause regex execute code from left to right, but if you try to search a more occurence of \2 
 ( in this example), at secondo and more times \2 will have reference about group 2.
 
+## Escape + character 
+
+(Letters == 0-9 a-z A-Z)
+
+\d --Number 0-9
+
+\h --White spaces orizzontal ( blank, tab )
+
+\s --White spaces ( blank, tab, go ahead )
+
+\w --Any letters
+
+\D --All characters excluding 0-9
+
+\H --All characters excluding white spaces orizzontal ( blank, tab )
+
+\S --All characters excluding white spaces ( blank, tab, go ahead )
+
+\w --All characters exluding letters
 
 
+## Word boundaries \b
+
+Word boundaries create ancor before and after a letters if these haven't other letters but space or tab ecc
+
+Example:
+```
+/\bciao/
+```
+
+ciao will be match
+
+aciao will not be match
 
 
+```
+/\bciao\b/
+```
+ciao will be match
+
+ciaoo will not be match
+
+cciao will not be match
 
 
+## Lazy selection
 
+Normally regex expressions are greedy and try to take the major text if they can.
 
+Example
 
+```
+/".*"/g
+```
+
+This expression will takes all text from first " until last ".
+
+Hello everybody "It's me". This is a simple text " for summary the principle concept".
+
+In this example the expression will take "It's me ... concept".
+
+If we want take all text inside " ... " we will switch from greedy to lazy capture, using a "?" character.
+
+```
+/".*?"/
+```
+
+Thanks lazy capture we will take only "It's me", because we said take until first occurence.
 
 
 
