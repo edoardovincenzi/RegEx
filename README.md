@@ -49,7 +49,7 @@ $ --Ending text or if expression flag ( m ) was able, every ending headed line.
 
 \\ --Escape character
 
-* --Zero or illimitate
+\* --Zero or illimitate
 
 ? --Zero or one occurrence
 
