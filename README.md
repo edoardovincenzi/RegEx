@@ -76,7 +76,19 @@ Every group are numbered, from 1 to n, and you can refer to these thanks this si
 N.B. If you find, with your group ([a-f]+), a string, for example, "afb" and use reference about this group, regex will try to 
 seach the same string found in the main group and NOT apply the same regex in the group reference.
 
-NON CAPTURING
+LOOKAROUND
+```
+(?=…)	Positive lookahead	(?=\d{10})\d{5}	01234 in 0123456789
+```
+```
+(?<=…)	Positive lookbehind	(?<=\d)cat	cat in 1cat
+```
+```
+(?!…)	Negative lookahead	(?!theatre)the\w+	theme
+```
+````
+(?<!…)	Negative lookbehind	\w{3}(?<!mon)ster	Munster
+````
 
 IF you want create a group, but not numbered this, you must use "?:" after "(". Es : (?:[a-z])[0-9]
 
@@ -104,7 +116,7 @@ first reference \2 will be empty beacause regex execute code from left to right,
 
 \S --All characters excluding white spaces ( blank, tab, go ahead )
 
-\w --All characters exluding letters
+\W --All characters exluding letters
 
 
 ## Word boundaries \b
