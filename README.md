@@ -1,171 +1,119 @@
-# RegEx
+# RegEx Guide
 
+- [Delimiters](#delimiters)
+- [Expression Flags](#expression-flags)
+- [Single Character or String](#single-character-or-string)
+- [Anchors](#anchors)
+- [Special Characters](#special-characters)
+- [Lookaround](#lookaround)
+- [Escape + Character](#escape--character)
+- [Word Boundaries](#word-boundaries)
+- [Lazy Selection](#lazy-selection)
+
+  
 ## Delimiters:
-Inside / and / we will put regex expression.
+Inside / and /, we will put regex expression.
 
 /  /
 
 
 ## Expression Flags
-These expression flags is used for delimited space to work 
+These expression flags are used to delimit spaces:
 
-g --Global, is used for check expression in all text.
-
-i --Insesitive, is used for check expression without considered text sensitive.
-
-m --Multiline
-
-s --Single line (dotall)
-
-x --Extended
-
-U --Ungreedy
-
+- **g**: Global, used to check expressions in the entire text.
+- **i**: Insensitive, used to check expressions without considering text case.
+- **m**: Multiline
+- **s**: Single line (detail)
+- **x**: Extended
+- **U**: Ungreedy
 
 ## Single character or string
-You can search a single character or a string.
-You can search a string, but in deep, you will search every single character about your string.
-was => char w next, char a next, char s.
-Remember that Regex expressions, for default, are case sensitive.
+You can search for a single character or a string.
+When searching for a string, you will explore every single character in the string.
+For example, 'was' will match 'char w', 'char a', 'char s'.
+Remember that Regex expressions are case-sensitive by default.
 
-/r/ or /was/
+`/r/` or `/was/`
 
-## Ancors
+## Anchors
 
-^ --Starting text or if expression flag ( m ) was able, every starting headed line.
+- **^**: Starting text or, if the expression flag (m) is enabled, every starting line.
+- **$**: Ending text or, if the expression flag (m) is enabled, every ending line.
+- **\A**: If we work with the multiline flag and want to take only the first character of the entire text, we can use this special character.
+- **\Z**: If we work with the multiline flag and want to take only the last character (excluding trailing spaces) of the entire text, we can use this special character.
+- **\z**: If we work with the multiline flag and want to take only the last character (including trailing spaces) of the entire text, we can use this special character.
 
-$ --Ending text or if expression flag ( m ) was able, every ending headed line.
+## Special characters
 
-\A --If we work with Flag multiline and we want take only the first character about all text we can use this special character
+- **.**: Every character, including spacing, tab, etc.
+- **|**: Similar to OR in math.
+- **\\**: Escape character.
+- **\***: Zero or unlimited occurrences.
+- **?**: Zero or one occurrence.
+- **!**: Zero or more occurrences.
+- **\+**: One or more occurrences.
+- **[]**: You can search a range of values with "-" [0-5] or [a-g]. It has the same principle as "|". You can also search a different range [0-4a-b]. Inside [], you mustn't use the escape character, but only for the "^" character. It is usually used to negate the range or character inside [].
+- **{}**: Specifies the quantity of elements.
 
-\Z --If we work with Flag multiline and we want take only the last character (exept go ahead space ...) about all text we can use this special character
+Examples:
 
-\z --If we work with Flag multiline and we want take only the last character (include go ahead space ...) about all text we can use this special character
+- `/a{3}/`: Exactly 3 'a'.
+- `/a{2,}/`: 2 or more.
+- `/a{1,3}/`: From 1 to 3 times 'a'.
 
-## Special character
+- **()**: Used to create groups. Thanks to these groups, we can apply {} or ? or ! etc., to all content in the group. Each group is numbered from 1 to n, and you can refer to them using the syntax: \n (where n indicates the number of the group).
 
-. --Every character include spacing, tab ecc
+Note: If you find a string (e.g., "afb") with your group ([a-f]+) and use a reference to this group, the regex will try to search the same string found in the main group and NOT apply the same regex in the group reference.
 
+## LOOKAROUND
 
-| --Is similar OR math
+- **Positive Lookahead `(?=...)`:**
+  - Example: `(?=\d{10})\d{5}` searches for '01234' in '0123456789'.
 
-\\ --Escape character
+- **Positive Lookbehind `(?<=...)`:**
+  - Example: `(?<=\d)cat` searches for 'cat' in '1cat'.
 
-\* --Zero or illimitate
+- **Negative Lookahead `(?!...)`:**
+  - Example: `(?!theatre)the\w+` searches for 'theme'.
 
-? --Zero or one occurrence
+- **Negative Lookbehind `(?<!...)`:**
+  - Example: `\w{3}(?<!mon)ster` searches for 'Munster'.
 
-! --Zero or more occurrence
+If you want to create a group that is not numbered, you must use "?:" after "(" (e.g., `(?:[a-z])[0-9]`).
 
-\+ --One or more occurrence
+Groups within a group, in this case, the external group has priority for numbering. External first, internal second.
 
-[] --You can search a range of value with "-" [0-5] or [a-g] or has the same principle of "|".
-Also you can seach a differente range [0-4a-b]. Inside [] you mustn't use escape character, but you must use it only for "^" character.
-Normally is used for negate range or character inside [].
+Regex normally executes code from left to right. If you try to use a reference group (\2, for example) before declaring group 2, at first reference, \2 will be empty because the regex executes code from left to right. However, if you try to search for more occurrences of \2 (in this example), at second and subsequent times, \2 will have a reference to group 2.
 
-{} --How much quantity of element. 
-
-/a{3}/ --Exactly 3 a. 
-
-/a{2,}/ --2 or more. 
-
-/a{1,3}/ --from 1 to 3 times a
-
-() --Is used for create group. Thanks these groups we can apply {} or ? or ! ecc, to all content into group.
-Every group are numbered, from 1 to n, and you can refer to these thanks this sintax : \n ( where n indicates number of group.
-N.B. If you find, with your group ([a-f]+), a string, for example, "afb" and use reference about this group, regex will try to 
-seach the same string found in the main group and NOT apply the same regex in the group reference.
-
-LOOKAROUND
-```
-(?=…)	Positive lookahead	(?=\d{10})\d{5}	01234 in 0123456789
-```
-```
-(?<=…)	Positive lookbehind	(?<=\d)cat	cat in 1cat
-```
-```
-(?!…)	Negative lookahead	(?!theatre)the\w+	theme
-```
-````
-(?<!…)	Negative lookbehind	\w{3}(?<!mon)ster	Munster
-````
-
-IF you want create a group, but not numbered this, you must use "?:" after "(". Es : (?:[a-z])[0-9]
-
-Group into group, in this case the external group have priority for enumbered. External first, internal second.
-
-Regex normally execute code from left to right. If you try to use a reference group ( \2 example ) before group 2 declaration at
-first reference \2 will be empty beacause regex execute code from left to right, but if you try to search a more occurence of \2 
-( in this example), at secondo and more times \2 will have reference about group 2.
-
-## Escape + character 
+## Escape + character
 
 (Letters == 0-9 a-z A-Z)
 
-\d --Number 0-9
+- **\d**: Number 0-9
+- **\h**: Horizontal white spaces (blank, tab)
+- **\s**: White spaces (blank, tab, go ahead)
+- **\w**: Any letters
+- **\D**: All characters excluding 0-9
+- **\H**: All characters excluding horizontal white spaces (blank, tab)
+- **\S**: All characters excluding white spaces (blank, tab, go ahead)
+- **\W**: All characters excluding letters
 
-\h --White spaces orizzontal ( blank, tab )
+## Word Boundaries
 
-\s --White spaces ( blank, tab, go ahead )
-
-\w --Any letters
-
-\D --All characters excluding 0-9
-
-\H --All characters excluding white spaces orizzontal ( blank, tab )
-
-\S --All characters excluding white spaces ( blank, tab, go ahead )
-
-\W --All characters exluding letters
-
-
-## Word boundaries \b
-
-Word boundaries create ancor before and after a letters if these haven't other letters but space or tab ecc
+Word boundaries create anchors before and after letters if they don't have other letters but spaces or tabs, etc.
 
 Example:
-```
-/\bciao/
-```
 
-ciao will be match
-
-aciao will not be match
-
-
-```
-/\bciao\b/
-```
-ciao will be match
-
-ciaoo will not be match
-
-cciao will not be match
-
+- `/\bciao/`: 'ciao' will be a match, 'aciao' will not be a match.
+- `/\bciao\b/`: 'ciao' will be a match, 'ciaoo' will not be a match, 'cciao' will not be a match.
 
 ## Lazy selection
 
-Normally regex expressions are greedy and try to take the major text if they can.
+Normally, regex expressions are greedy and try to capture the maximum text possible.
 
-Example
+Example:
 
-```
-/".*"/g
-```
+- `/".*"/g`: This expression captures all text from the first " until the last ".
+- `/".*?"/`: Thanks to lazy capture, this expression captures only "It's me" because we specified to capture until the first occurrence.
 
-This expression will takes all text from first " until last ".
-
-Hello everybody "It's me". This is a simple text " for summary the principle concept".
-
-In this example the expression will take "It's me ... concept".
-
-If we want take all text inside " ... " we will switch from greedy to lazy capture, using a "?" character.
-
-```
-/".*?"/
-```
-
-Thanks lazy capture we will take only "It's me", because we said take until first occurence.
-
-
-
+Feel free to ask if you have any further questions!
